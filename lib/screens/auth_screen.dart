@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:wee_chat/widgets/auth/auth_form.dart';
 
-class AuthScreen extends StatelessWidget {
-  static const routeName = 'auth-screen';
+class AuthScreen extends StatefulWidget {
+  static const routeName = '/auth-screen';
+
+  @override
+  _AuthScreenState createState() => _AuthScreenState();
+}
+
+class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text('Auth'),
       ),
-      body: Center(
-        child: Text('Hello'),
-      ),
+      body: AuthForm(),
     );
   }
 }
