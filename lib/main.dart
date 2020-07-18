@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:wee_chat/screens/chat_screen.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'WeeChat',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.pink,
         backgroundColor: Colors.pink,
@@ -26,7 +28,15 @@ class MyApp extends StatelessWidget {
             )),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: AuthScreen(),
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.onAuthStateChanged,
+        builder: (ctx, userSnapshot) {
+          if (userSnapshot.hasData) {
+            return ChatScreen();
+          }
+          return AuthScreen();
+        },
+      ),
       routes: {
         ChatScreen.routeName: (ctx) => ChatScreen(),
         AuthScreen.routeName: (ctx) => AuthScreen(),
