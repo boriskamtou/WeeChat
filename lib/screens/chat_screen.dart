@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../widgets/messages.dart';
+import 'package:wee_chat/widgets/chat/new_messages.dart';
+import '../widgets/chat/messages.dart';
 
 class ChatScreen extends StatelessWidget {
-  static const routeName = 'chet-screen';
+  static const routeName = 'chat-screen';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,18 +47,9 @@ class ChatScreen extends StatelessWidget {
             Expanded(
               child: Messages(),
             ),
+            NewMessage(),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Firestore.instance
-              .collection('chats/kw7wK1D1KqJVdX4pmVyy/messages')
-              .add({
-            'text': 'Hi! from Cameroon',
-          });
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
